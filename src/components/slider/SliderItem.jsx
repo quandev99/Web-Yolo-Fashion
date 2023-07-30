@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Button from "../button";
 
 const SliderItem = ({ item, active }) => (
   <>
@@ -14,7 +15,13 @@ const SliderItem = ({ item, active }) => (
         </div>
         <div className="home-slider__item__info__btn">
           <Link to={item.path}>
-            <button>Xem chi tiết</button>
+            <Button
+              backgroundColor={item.color}
+              icon={"bx bx-cart"}
+              animate={true}
+            >
+              Xem chi tiết
+            </Button>
           </Link>
         </div>
       </div>
