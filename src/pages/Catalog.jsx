@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Helmet from "../components/helmet";
-import ProductCard from "../components/productCard";
 import productData from "../assets/fake-data/products";
 import category from "../assets/fake-data/category";
-import Grid from "../components/grid";
 import CheckBox from "../components/checkbox";
 import colors from "../assets/fake-data/product-color";
 import size from "../assets/fake-data/product-size";
 import Button from "../components/button";
+import InfinityList from "../components/infinityList";
 const Catalog = () => {
   const initFilter = {
     category: [],
@@ -39,23 +38,31 @@ const Catalog = () => {
     } else {
       switch (type) {
         case "CATEGORY":
-          const newCategory = filter.category.filter(
-            (e) => e !== item.categorySlug
-          );
-          setFilter({ ...filter, category: newCategory });
+          {
+            const newCategory = filter.category.filter(
+              (e) => e !== item.categorySlug
+            );
+            setFilter({ ...filter, category: newCategory });
+          }
           break;
         case "COLOR":
-          const newColor = filter.color.filter((e) => e !== item.color);
-          setFilter({ ...filter, color: newColor });
+          {
+            const newColor = filter.color.filter((e) => e !== item.color);
+            setFilter({ ...filter, color: newColor });
+          }
           break;
         case "SIZE":
-          const newSize = filter.size.filter((e) => e !== item.size);
-          setFilter({ ...filter, size: newSize });
+          {
+            const newSize = filter.size.filter((e) => e !== item.size);
+            setFilter({ ...filter, size: newSize });
+          }
           break;
         default:
       }
     }
   };
+  const clearFilter = () => setFilter(initFilter);
+
   const updateProducts = useCallback(() => {
     let temp = productList;
     if (filter.category.length > 0) {
@@ -79,11 +86,18 @@ const Catalog = () => {
   useEffect(() => {
     updateProducts();
   }, [updateProducts]);
+  const filterRef = useRef(null);
+  const showHiderFilter = () => filterRef.current.classList.toggle("active");
   return (
     <Helmet title="Sản phẩm">
-      {console.log(filter)}
       <div className="catalog">
-        <div className="catalog__filter">
+        <div className="catalog__filter" ref={filterRef}>
+          <div
+            className="catalog__filter__close"
+            onClick={() => showHiderFilter()}
+          >
+            <i className="bx bx-left-arrow-alt"></i>
+          </div>
           <div className="catalog__filter__widget">
             <div className="catalog__filter__widget__title">
               danh mục sản phẩm
@@ -145,23 +159,19 @@ const Catalog = () => {
           </div>
           <div className="catalog__filter__widget">
             <div className="catalog__filter__widget_content">
-              <Button siz="sm">Xóa bộ lọc</Button>
+              <Button siz="sm" onClick={clearFilter}>
+                Xóa bộ lọc
+              </Button>
             </div>
           </div>
         </div>
+        <div className="catalog__fitter__toggle">
+          <Button onClick={() => showHiderFilter()} size="sm">
+            bộ lọc
+          </Button>
+        </div>
         <div className="catalog__content">
-          <Grid col={3} mdCol={2} smCol={2} gap={20}>
-            {products.map((item, index) => (
-              <ProductCard
-                key={index}
-                image01={item.image01}
-                image02={item.image02}
-                price={Number(item.price)}
-                title={item.title}
-                slug={item.slug}
-              ></ProductCard>
-            ))}
-          </Grid>
+          <InfinityList data={products}></InfinityList>
         </div>
       </div>
     </Helmet>
