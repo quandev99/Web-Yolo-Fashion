@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "../header";
 import Footer from "../footer";
 import MyRoutes from "../../routes/Routes"; // Adjust the import path accordingly
+import ProductDetailModal from "../portal/productDetailModal";
 
 const Layout = () => {
   return (
@@ -16,6 +17,7 @@ const Layout = () => {
           </div>
         </div>
         <Footer />
+        <ProductDetailModal></ProductDetailModal>
       </div>
     </BrowserRouter>
   );

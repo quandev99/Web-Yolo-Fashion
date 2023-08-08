@@ -10,10 +10,10 @@ const InfinityList = (props) => {
   const [load, setLoad] = useState(false);
   const [index, setIndex] = useState(1);
 
-  // useEffect(() => {
-  //   setData(products.slice(0, perLoad));
-  //   setIndex(1);
-  // }, [products]);
+  useEffect(() => {
+    setData(products.slice(0, perLoad));
+    setIndex(1);
+  }, [products]);
 
   useEffect(() => {
     const handleScroll = () => {

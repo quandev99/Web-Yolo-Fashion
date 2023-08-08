@@ -7,13 +7,22 @@ import numberWithCommas from "../../utils/numberWithCommas";
 
 const ProductDetail = (props) => {
   const navigate = useNavigate();
-  const product = props.product;
-  const [previewImg, setPreviewImg] = useState(product.image01);
+  let product = props?.product;
+  console.log(product);
+  if (product === undefined)
+    product = {
+      price: 0,
+      title: "",
+      slug: "",
+      colors: [],
+      size: [],
+      quantity: 0,
+    };
+  const [previewImg, setPreviewImg] = useState(product?.image01);
   const [descriptionExpand, setDescriptionExpand] = useState(false);
   const [color, setColor] = useState(undefined);
   const [size, setSize] = useState(undefined);
   const [quantity, setQuantity] = useState(1);
-
   const updateQuantity = (type) => {
     if (type === "plus") {
       setQuantity(quantity + 1);
@@ -152,6 +161,10 @@ const ProductDetail = (props) => {
             </div>
           </div>
         </div>
+        <div className="product__info__item">
+          <Button onClick={() => addToCart()}>thêm vào giỏ hàng</Button>
+          <Button onClick={() => gotoCart()}>mua ngay</Button>
+        </div>
       </div>
       <div
         className={`product-description mobile ${
@@ -171,10 +184,6 @@ const ProductDetail = (props) => {
             {descriptionExpand ? "thu gọn" : "Xem thêm"}
           </Button>
         </div>
-      </div>
-      <div className="product__info__item">
-        <Button onClick={() => addToCart()}>thêm vào giỏ hàng</Button>
-        <Button onClick={() => gotoCart()}>mua ngay</Button>
       </div>
     </div>
   );
