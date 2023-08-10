@@ -277,10 +277,10 @@ const getCartItemsInfo = (cartItems) => {
       });
     });
   }
-  // console.log(res)
+  return res;
   // console.log('sorted')
   // console.log(res.sort((a, b) => a.slug > b.slug ? 1 : (a.slug < b.slug ? -1 : 0)))
-  return res.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
+  // return res.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
 };
 
 const productData = {
