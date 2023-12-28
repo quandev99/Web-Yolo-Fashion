@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BrowserRouter } from "react-router-dom";
-import Footer from "../footer/Footer";
+import Footer from "../footer";
 import Header from "../header";
 import MyRoutes from "../../routes/Routes"; // Adjust the import path accordingly
 import ProductDetailModal from "../portal/productDetailModal";
