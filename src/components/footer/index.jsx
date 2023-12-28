@@ -2,7 +2,6 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import Grid from "../grid";
-import logo from "../../assets/images/logo-2.png";
 
 const footerAboutLinks = [
   {
@@ -38,7 +37,6 @@ const footerCustomerLinks = [
 ];
 
 const Footer = () => {
-  const imageUrl = new URL(logo, window.location.origin).toString();
   return (
     <footer className="footer">
       <div className="container">
@@ -80,7 +78,7 @@ const Footer = () => {
           <div className="footer__about">
             <p>
               <Link to="/">
-                <img src={imageUrl} className="footer__logo" alt="" />
+                <img src={""} className="footer__logo" alt="" />
               </Link>
             </p>
             <p>
